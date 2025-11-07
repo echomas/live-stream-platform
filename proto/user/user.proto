@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+package user;
+
+import "proto/common/common.proto";
+
+option go_package = "github.com/live-stream-platform/proto/user";
+
+service UserService {
+  // 用户注册
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  // 用户登录
+  rpc Login(LoginRequest) returns (LoginResponse);
+  //登出
+  rpc Logout(LogoutRequest) returns (common.Response);
+  // 获取用户信息
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
+  // 更新用户信息
+  rpc UpdateUserInfo(UpdateUserInfoRequest) returns (common.Response);
+  // 验证 Token
+  rpc VerifyToken(VerifyTokenRequest) returns (VerifyTokenResponse);
+  // 批量获取用户信息
+  rpc GetUsersByIds(GetUsersByIdsRequest) returns (GetUsersByIdsResponse);
+  // 健康检查
+  rpc Health(HealthRequest) returns (HealthResponse);
+}
+
+
+// 注册请求
+message RegisterRequest {
+  string email = 1;
+  string username = 2;
+  string password = 3;
+  string nickname = 4;
+  int32 gender = 5;
+}
+
+//注册响应
+message RegisterResponse {
+  int32 code = 1;
+  string message = 2;
+  int64 user_id = 3;
+}
+
+// 登录请求
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+// 登录响应
+message LoginResponse {
+  int32 code = 1;
+  string message = 2;
+  string token = 3;
+  common.UserInfo user = 4;
+}
+
+// 登出请求
+message LogoutRequest {
+  int64 user_id = 1;
+  string token = 2;
+}
+
+message GetUserInfoRequest {
+  int64 user_id = 1;
+}
+
+// 获取用户信息响应
+message GetUserInfoResponse {
+  int32 code = 1;
+  string message = 2;
+  common.UserInfo user = 3;
+}
+
+// 更新用户信息请求
+message UpdateUserInfoRequest {
+  int64 user_id = 1;
+  string nickname = 2;
+  int32 gender = 3;
+  string avatar = 4;
+}
+
+// 验证Token请求
+message VerifyTokenRequest {
+  string token = 1;
+}
+
+// 验证 Token 响应
+message VerifyTokenResponse {
+  int32 code = 1;
+  string message = 2;
+  int64 user_id = 3;
+   string username = 4;
+}
+
+// 批量获取用户信息请求
+message GetUsersByIdsRequest {
+  repeated int64 user_ids = 1;
+}
+
+// 批量获取用户信息响应
+message GetUsersByIdsResponse {
+  int32 code = 1;
+  string message = 2;
+  repeated common.UserInfo users = 3;
+}
+
+// 健康检查请求
+message HealthRequest {}
+
+// 健康检查响应
+message HealthResponse {
+  string status = 1;
+}

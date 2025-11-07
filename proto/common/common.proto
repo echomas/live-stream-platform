@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "github.com/live-stream-platform/proto/common";
+
+// 通用响应
+message Response {
+  int32 code = 1;
+  string message = 2;
+}
+
+// 分页请求
+message PageRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+// 分页响应
+message PageResponse {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 total = 3;
+}
+
+// 用户信息
+message UserInfo {
+  int64 id = 1;
+  string username = 2;
+  string nickname = 3;
+  string email = 4;
+  int32 gender = 5;
+  string avatar = 6;
+  int32 status = 7;
+  int64 created_at = 8;
+}
+
+// 时间范围
+message TimeRange {
+  int64 start_time = 1;
+  int64 end_time = 2;
+}
