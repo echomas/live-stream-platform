@@ -4,6 +4,8 @@ import (
 	"encoding/hex"
 	"golang.org/x/crypto/bcrypt"
 	"math/rand"
+	"net/mail"
+	"regexp"
 )
 
 // HashPassword 加密密码
@@ -25,4 +27,19 @@ func GenerateRandomString(length int) (string, error) {
 		return "", nil
 	}
 	return hex.EncodeToString(bytes)[:length], nil
+}
+
+func ValidateEmail(email string) bool {
+	_, err := mail.ParseAddress(email)
+	return err == nil
+}
+
+func ValidateUsername(username string) bool {
+	usernameRegex := regexp.MustCompile(`^[a-zA-Z0-9_]{3,20}$`)
+	return usernameRegex.MatchString(username)
+}
+
+func ValidatePassword(password string) bool {
+	passwordRegex := regexp.MustCompile(`^[a-zA-Z0-9]{8,20}$`)
+	return passwordRegex.MatchString(password)
 }
