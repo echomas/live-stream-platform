@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package user;
 
-import "proto/common/common.proto";
+import "common/common.proto";
 
-option go_package = "github.com/echomas/live-stream-platform/proto/user";
+option go_package = "proto/user";
 
 service UserService {
   // 用户注册
