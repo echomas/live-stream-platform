@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package common;
 
-option go_package = "github.com/live-stream-platform/proto/common";
+option go_package = "github.com/echomas/live-stream-platform/proto/common";
 
 // 通用响应
 message Response {

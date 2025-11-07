@@ -4,7 +4,7 @@ package user;
 
 import "proto/common/common.proto";
 
-option go_package = "github.com/live-stream-platform/proto/user";
+option go_package = "github.com/echomas/live-stream-platform/proto/user";
 
 service UserService {
   // 用户注册
